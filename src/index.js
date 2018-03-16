@@ -39,7 +39,7 @@ const close = () => {
 	return pool.end()
 }
 
-export {
+export default {
 	init,
 	dq,
 	dqf,

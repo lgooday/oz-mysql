@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.close = exports.dqf = exports.dq = exports.init = undefined;
 
 var _promiseMysql = require('promise-mysql');
 
@@ -52,7 +51,9 @@ var close = function close() {
 	return pool.end();
 };
 
-exports.init = init;
-exports.dq = dq;
-exports.dqf = dqf;
-exports.close = close;
+exports.default = {
+	init: init,
+	dq: dq,
+	dqf: dqf,
+	close: close
+};
