@@ -22,7 +22,6 @@ var init = function init(conf) {
 
 var getConnection = function getConnection() {
 	return pool.getConnection().disposer(function (connection) {
-		console.log('disposing');
 		pool.releaseConnection(connection);
 	});
 };
