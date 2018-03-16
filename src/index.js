@@ -14,22 +14,29 @@ const getConnection = () => {
 	})
 }
 
-const dq = (query, params, tag) => { // eslint-disable-line no-unused-vars
+const queryAll = (query, params, tag) => { // eslint-disable-line no-unused-vars
 	return Promise.using(getConnection(), connection => {
 		return connection.query(query, params)
 	})
 }
 
-const dqf = (query, params, tag) => { // eslint-disable-line no-unused-vars
+const queryOne = (query, params, rejectOnNotFound = false, tag = null) => { // eslint-disable-line no-unused-vars
 	return Promise.using(getConnection(), connection => {
 		return connection.query(query, params)
 			.then(
 				rows => {
-					if (rows && rows.length === 1) {
-						return rows[0]
+					if (rows) {
+						if (!rows.length) {
+							if (rejectOnNotFound) {
+								return Promise.reject(new Error('query returned 0 row'))
+							}
+							return Promise.resolve()
+						} else if (rows.length === 1) { // eslint-disable-line no-else-return
+							return rows[0]
+						} else {
+							return Promise.reject(new Error('query returned more than one row'))
+						}
 					}
-
-					return Promise.reject(new Error('not 1 item returned'))
 				}
 			)
 	})
@@ -41,7 +48,7 @@ const close = () => {
 
 export default {
 	init,
-	dq,
-	dqf,
+	queryAll,
+	queryOne,
 	close
 }

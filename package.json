@@ -24,6 +24,7 @@
     "xo": "^0.20.2"
   },
   "xo": {
+	"ignores" : ["./build"],
     "semicolon": false,
     "rules": {
       "capitalized-comments": "off",
