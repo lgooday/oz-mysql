@@ -9,7 +9,6 @@ const init = conf => {
 
 const getConnection = () => {
 	return pool.getConnection().disposer(connection => {
-		console.log('disposing')
 		pool.releaseConnection(connection)
 	})
 }
