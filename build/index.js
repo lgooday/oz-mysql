@@ -27,22 +27,32 @@ var getConnection = function getConnection() {
 	});
 };
 
-var dq = function dq(query, params, tag) {
+var queryAll = function queryAll(query, params, tag) {
 	// eslint-disable-line no-unused-vars
 	return _bluebird2.default.using(getConnection(), function (connection) {
 		return connection.query(query, params);
 	});
 };
 
-var dqf = function dqf(query, params, tag) {
+var queryOne = function queryOne(query, params) {
+	var rejectOnNotFound = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	var tag = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 	// eslint-disable-line no-unused-vars
 	return _bluebird2.default.using(getConnection(), function (connection) {
 		return connection.query(query, params).then(function (rows) {
-			if (rows && rows.length === 1) {
-				return rows[0];
+			if (rows) {
+				if (!rows.length) {
+					if (rejectOnNotFound) {
+						return _bluebird2.default.reject(new Error('query returned 0 row'));
+					}
+					return _bluebird2.default.resolve();
+				} else if (rows.length === 1) {
+					// eslint-disable-line no-else-return
+					return rows[0];
+				} else {
+					return _bluebird2.default.reject(new Error('query returned more than one row'));
+				}
 			}
-
-			return _bluebird2.default.reject(new Error('not 1 item returned'));
 		});
 	});
 };
@@ -53,7 +63,7 @@ var close = function close() {
 
 exports.default = {
 	init: init,
-	dq: dq,
-	dqf: dqf,
+	queryAll: queryAll,
+	queryOne: queryOne,
 	close: close
 };
