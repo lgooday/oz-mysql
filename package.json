@@ -1,6 +1,6 @@
 {
   "name": "oz-mysql",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "oz-mysql",
   "main": "build/index.js",
   "scripts": {
@@ -24,7 +24,9 @@
     "xo": "^0.20.2"
   },
   "xo": {
-	"ignores" : ["./build"],
+    "ignores": [
+      "./build"
+    ],
     "semicolon": false,
     "rules": {
       "capitalized-comments": "off",
