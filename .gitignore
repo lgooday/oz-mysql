@@ -59,3 +59,4 @@ typings/
 
 .vscode/settings.json
 src/test.js
+build/test.js
