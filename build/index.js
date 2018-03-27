@@ -56,6 +56,14 @@ var queryOne = function queryOne(query, params) {
 	});
 };
 
+var query = function query(_query, params) {
+	var tag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	// eslint-disable-line no-unused-vars
+	return _bluebird2.default.using(getConnection(), function (connection) {
+		return connection.query(_query, params);
+	});
+};
+
 var close = function close() {
 	return pool.end();
 };
@@ -64,5 +72,6 @@ exports.default = {
 	init: init,
 	queryAll: queryAll,
 	queryOne: queryOne,
+	query: query,
 	close: close
 };
