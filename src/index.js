@@ -41,6 +41,12 @@ const queryOne = (query, params, rejectOnNotFound = false, tag = null) => { // e
 	})
 }
 
+const query = (query, params, tag = null) => { // eslint-disable-line no-unused-vars
+	return Promise.using(getConnection(), connection => {
+		return connection.query(query, params)
+	})
+}
+
 const close = () => {
 	return pool.end()
 }
@@ -49,5 +55,6 @@ export default {
 	init,
 	queryAll,
 	queryOne,
+	query,
 	close
 }
