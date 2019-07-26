@@ -4,24 +4,15 @@ import Promise from 'bluebird'
 let pool
 
 const init = conf => {
-	pool = mysql.createPool(conf)
-}
-
-const getConnection = () => {
-	return pool.getConnection().disposer(connection => {
-		pool.releaseConnection(connection)
-	})
+	return mysql.createPool(conf).then(t => { pool = t })
 }
 
 const queryAll = (query, params, tag) => { // eslint-disable-line no-unused-vars
-	return Promise.using(getConnection(), connection => {
-		return connection.query(query, params)
-	})
+	return pool.query(query, params)
 }
 
 const queryOne = (query, params, rejectOnNotFound = false, tag = null) => { // eslint-disable-line no-unused-vars
-	return Promise.using(getConnection(), connection => {
-		return connection.query(query, params)
+		return pool.query(query, params)
 			.then(
 				rows => {
 					if (rows) {
@@ -38,13 +29,10 @@ const queryOne = (query, params, rejectOnNotFound = false, tag = null) => { // e
 					}
 				}
 			)
-	})
 }
 
 const query = (query, params, tag = null) => { // eslint-disable-line no-unused-vars
-	return Promise.using(getConnection(), connection => {
-		return connection.query(query, params)
-	})
+		return pool.query(query, params)
 }
 
 const close = () => {
