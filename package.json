@@ -1,6 +1,6 @@
 {
   "name": "oz-mysql",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "oz-mysql",
   "main": "build/index.js",
   "scripts": {
