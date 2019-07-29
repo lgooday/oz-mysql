@@ -1,6 +1,6 @@
 {
   "name": "oz-mysql",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "oz-mysql",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
