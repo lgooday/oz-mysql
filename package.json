@@ -12,9 +12,8 @@
         "dist/**/*"
     ],
     "scripts": {
-        "build": "rimraf dist && tsc --declaration",
-        "test": "ts-mocha src/**/*.spec.ts",
-        "dev": "nodemon --exec ts-node src/index.ts --watch src"
+        "build": "rimraf ./dist && tsc -p src --declaration",
+        "test": "ts-mocha src/**/*.spec.ts"
     },
     "keywords": [],
     "author": "lgooday",
@@ -37,7 +36,6 @@
         "rimraf": "^3.0.2",
         "sinon": "^10.0.0",
         "ts-mocha": "^8.0.0",
-        "ts-node": "^9.1.1",
         "typescript": "^4.2.4"
     }
 }
