@@ -57,6 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
-.vscode/settings.json
+.vscode/
 src/test.js
 build/test.js

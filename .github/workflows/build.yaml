@@ -1,0 +1,24 @@
+name: build
+on:
+    push:
+        branches: [master]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - run: cp ./.github/workflows/.npmrc ./.npmrc
+            - run: npm install
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: npm run test
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: npm run build
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: npm publish
+              env:
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - run: rm -f ./.npmrc
