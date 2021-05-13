@@ -60,3 +60,4 @@ typings/
 .vscode/
 src/test.js
 build/test.js
+dist

@@ -52,3 +52,5 @@ export const poolFactory = async (conf: mysql.PoolConfig): Promise<mysql.Pool> =
         return Promise.reject(new Error(e))
     }
 }
+
+export { PoolConfig } from 'promise-mysql'
